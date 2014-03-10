@@ -529,6 +529,7 @@ upstream_exchange_name(XNameBin, VHost, DownXName, Suffix) ->
     <<Name/binary, " ", Suffix/binary>>.
 
 delete_upstream_exchange(Conn, XNameBin) ->
+# How about add a is_exist(XNameBin) before delete it in order not to log {amqp_error, not_found}?
     rabbit_federation_link_util:disposable_channel_call(
       Conn, #'exchange.delete'{exchange = XNameBin}).
 
